@@ -1,6 +1,6 @@
 # EnjuuBot
 
-### What is EnjuuBot?
+## What is EnjuuBot?
 > EnjuuBot is a Discord
 Bot written in Java that
 can handle the Ripple API
