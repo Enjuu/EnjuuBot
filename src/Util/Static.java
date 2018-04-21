@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.EmbedBuilder;
 
 public class Static {
 	
+	
+	
 	public static String ver = "0.148 ALPHA/ERRORPRINTENABLED ";
 	
 	public static EmbedBuilder CREATE_NORMAL_ERROR(String errorcode, String Text, String kamoji,String Syntax) {
@@ -14,7 +16,7 @@ public class Static {
 		eb.setColor(Color.red);
 		eb.setDescription(errorcode+" - "+ Text+ " "+kamoji);
 		eb.addBlankField(true);
-		eb.addField("-user <UserID>", "", false);
+		eb.addField(Syntax, "", false);
 		return eb;
 		
 	}
