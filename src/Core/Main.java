@@ -27,7 +27,9 @@ public class Main {
 		builder.addEventListener(new CommandListener());
 		builder.addEventListener(new readyListener());
 		
-		commandHandler.commands.put("user", new cmdUser());
+		commandHandler.commands.put("userid", new cmdUserID());
+		commandHandler.commands.put("username", new cmdUserName());
+		commandHandler.commands.put("isonline", new isonline());
 		
 		
 		
