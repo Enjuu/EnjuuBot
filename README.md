@@ -19,7 +19,7 @@ If you have any issues come on the Enjuu Server [Discord](https://discord.gg/N9
 ## Current Commands:
 1. -user (name/id) | Display the Profile of the target.
 2. -isonline (name/id) | Display if the Person is Online.
-### It is a new project and i will implement more. The Bot is currently in the Alpha State.
+### It is a new project and i will implement more. The Bot is currently in the Alpha State!
 
 ## Thanks to:
 * [SoosBot(My Bot)](https://github.com/MarcPlaying/SoosBot-Discord-Bot) | CommandBase
