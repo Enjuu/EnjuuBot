@@ -1,11 +1,17 @@
 package Core;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.security.auth.login.LoginException;
 
-import Commands.cmdUser;
+import org.json.simple.parser.ParseException;
+
+import Commands.cmdIsOnlineNew;
+import Commands.cmdUserNew;
 import Listener.CommandListener;
 import Listener.readyListener;
-import Util.Static;
+import Util.Config;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -18,8 +24,21 @@ public class Main {
 	public static JDABuilder builder = new JDABuilder(AccountType.BOT);
 	
 	public static void main (String[] args) {
-		builder.setToken("NOPE!");
-		builder.setGame(Game.playing("on Enjuu"));
+		Config.createConfig();
+		try {
+			Config.readConfig();
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		} catch (ParseException e1) {
+
+			e1.printStackTrace();
+		}
+		builder.setToken(Config.getString("token"));
+		builder.setGame(Game.playing(Config.getString("status")));
 		builder.setAutoReconnect(true);
 		builder.setStatus(OnlineStatus.ONLINE);
 		
@@ -27,11 +46,8 @@ public class Main {
 		builder.addEventListener(new CommandListener());
 		builder.addEventListener(new readyListener());
 		
-		commandHandler.commands.put("userid", new cmdUserID());
-		commandHandler.commands.put("username", new cmdUserName());
-		commandHandler.commands.put("isonline", new isonline());
-		
-		
+		commandHandler.commands.put("isonline", new cmdIsOnlineNew());
+		commandHandler.commands.put("user", new cmdUserNew());
 		
 		try {
 			@SuppressWarnings("unused")
