@@ -7,13 +7,17 @@ can handle the Ripple API
 and can Display User Profiles.
 
 ## How to use?
+* Download Release [Release](https://github.com/Enjuu/EnjuuBot/releases)
 * Install Java 8
-* Create a Start Script with minimum 500MB Ram
-* Change all things to your Private Server(Only if you are permitted)
-* Change the Bot Token from ("NOPE!") to your Token
-* Compile the Java Files
-* Move it on your Server
-* Run it with the script
+* Create a Start Script with minimum 500MB Ram! Windows Start Scipt is in the Release
+* Start it one Time wait and Close it.
+* Now is a Config there that should look like this
+```json
+{"web":"enjuu.click","apiprotocol":"https","name":"Enjuu","webprotocol":"https","api":"enjuu.click","token":"NaN","status":"on Enjuu"}
+```
+* Now you must Replace the Token with your Discord token!
+* Start the Bot and it working yay c;
+
 If you have any issues come on the Enjuu Server [Discord](https://discord.gg/N9KpaWn) and write me an PM.
 
 ## Current Commands:
