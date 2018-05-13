@@ -5,23 +5,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import Util.Config;
 import Util.Static;
-import Util.User;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -44,6 +39,7 @@ public class cmdUserNew implements Command{
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else{
 			try{
+				@SuppressWarnings("unused")
 				Long p = Long.parseLong(args[0]);
 				// -------- IS A ID ---------
 				try{
@@ -206,7 +202,7 @@ public class cmdUserNew implements Command{
 				            	
 				            	File file = new File("user.json");
 				            		  
-				            		   file.delete();
+				            	file.delete();
 				            		   
 				            		
 				            	   
@@ -283,6 +279,7 @@ public class cmdUserNew implements Command{
 				    }
 				    catch (Exception e3)
 				    {
+				    	 e.printStackTrace();
 				        System.out.println(e.getMessage());
 				    }
 			}
@@ -294,6 +291,7 @@ public class cmdUserNew implements Command{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		
+		Static.ReturnMessage(event);
 		
 	}
 
