@@ -1,13 +1,15 @@
 package Core;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.security.auth.login.LoginException;
 
 import org.json.simple.parser.ParseException;
 
+import Commands.cmdBest;
+import Commands.cmdHelp;
 import Commands.cmdIsOnlineNew;
+import Commands.cmdRecent;
 import Commands.cmdUserNew;
 import Listener.CommandListener;
 import Listener.readyListener;
@@ -26,15 +28,9 @@ public class Main {
 	public static void main (String[] args) {
 		Config.createConfig();
 		try {
-			Config.readConfig();
-		} catch (FileNotFoundException e1) {
+			Config.loadConfig();
+		} catch (IOException | ParseException e1) {
 			
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-
 			e1.printStackTrace();
 		}
 		builder.setToken(Config.getString("token"));
@@ -47,22 +43,22 @@ public class Main {
 		builder.addEventListener(new readyListener());
 		
 		commandHandler.commands.put("isonline", new cmdIsOnlineNew());
+		commandHandler.commands.put("recent", new cmdRecent());
 		commandHandler.commands.put("user", new cmdUserNew());
+		commandHandler.commands.put("best", new cmdBest());
+		commandHandler.commands.put("help", new cmdHelp());
 		
 		try {
 			@SuppressWarnings("unused")
 			JDA jda = builder.buildBlocking();
 		} catch (LoginException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RateLimitedException e) {
-			
+			e.printStackTrace();
 		}
 		
 	
