@@ -16,7 +16,7 @@ public class Config {
 	public static Object config = null;
 	public static JSONObject objconfig = null;
 	
-	public static void readConfig() throws FileNotFoundException, IOException, ParseException {
+	public static void loadConfig() throws FileNotFoundException, IOException, ParseException {
 		File dir = new File("tmp");
 		dir.mkdir();
 		JSONParser parser = new JSONParser();
@@ -25,12 +25,11 @@ public class Config {
 		config = obj;
         JSONObject jsonObject = (JSONObject) obj;
         objconfig = jsonObject;
-        System.out.println("[INFO]: Successfully loaded");
+        System.out.println("[INFO]: Successfully loaded Config.json");
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked" })
 	public static void createConfig()  {
-		// https://marc.enjuu.click/download/4986555.json
 		File f = new File("config.json");
 		if(f.exists()) {
 			System.out.println("[INFO]: Found Config! No one must be created");
