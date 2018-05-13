@@ -211,6 +211,7 @@ public class cmdIsOnlineNew implements Command{
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
 		
+		Static.ReturnMessage(event);
 		
 	}
 
