@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.temporal.TemporalAccessor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -36,10 +37,10 @@ public class cmdRecent implements Command{
 	public void action(String[] args, MessageReceivedEvent event)
 			throws FileNotFoundException, UnsupportedEncodingException {
 		if(args.length == 0) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Wrong Arguments", "(ಥ﹃ಥ)", "-recent <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Wrong Arguments", "(à²¥ï¹ƒà²¥)", "-best <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else if(args.length > 1) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Too much Arguments?", "ಠ_ಠ", "-recent <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Too much Arguments?", "à² _à² ", "-best <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else{
 			try{
@@ -97,26 +98,36 @@ public class cmdRecent implements Command{
 		            	File file2 = new File("tmp/rc.json");
 		            	String content = FileUtils.readFileToString(file2, "utf-8");
 		            	
-		            	Long id = null;
+		            	//get Infos
+		            	
+		            	
 		            	Long score = null;
 		            	Long max_combo = null;
-		            	@SuppressWarnings("unused")
 						Boolean full_combo = null;
 		            	Long pp = null;
-						
+						String rank = null;
+		            	
 						String song_name = null;
+						Long bm_id = null;
+		            	Long diff = null;
+						Long max_combo_map = null;
+						Long bmid = null;
 		            	
 						JSONObject obj = new JSONObject(content);
 						JSONArray arr = obj.getJSONArray("scores");
 						for (int i = 0; i < arr.length(); i++)
 						{
 							if(i == 0) {
-								id = arr.getJSONObject(i).getLong("id");
+								rank = arr.getJSONObject(i).getString("rank");
 							    score = arr.getJSONObject(i).getLong("score");
 								max_combo = arr.getJSONObject(i).getLong("max_combo");
 								full_combo = arr.getJSONObject(i).getBoolean("full_combo");
 								pp = arr.getJSONObject(i).getLong("pp");
 								song_name = arr.getJSONObject(i).getJSONObject("beatmap").getString("song_name");
+								bm_id = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmapset_id");
+								bmid = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmap_id");
+								diff = arr.getJSONObject(i).getJSONObject("beatmap").getLong("difficulty");
+								max_combo_map = arr.getJSONObject(i).getJSONObject("beatmap").getLong("max_combo");
 								@SuppressWarnings("unused")
 								JSONObject scoreEntry = arr.getJSONObject(i);
 								
@@ -126,32 +137,28 @@ public class cmdRecent implements Command{
 						   
 						}
 						
-						try {
+						String endnumber = "";
+						
+						String number = String.valueOf(diff);
+						for(int i = 0; i < number.length(); i++) {
+						    int j = Character.digit(number.charAt(i), 10);
+						    endnumber = endnumber + j;
+						    if(i == 4) {
+						    	return;
+						    }
+						}
+						
+						endnumber.toString();
 			                EmbedBuilder eb = new EmbedBuilder();
-			                eb.setAuthor(User.ID_TO_USER(Long.parseLong(args[0])), Config.getString("webprotocol")+"://"+Config.getString("web")+"/u/"+args[0], Config.getString("webprotocol")+"://a."+Config.getString("web")+"/"+args[0]);
-			                eb.setColor(Static.CREATE_RANDOM_COLOR());
 			                
-			                //Display
-		    				eb.addField("Latest "+Config.getString("name")+ " Score of " + User.ID_TO_USER(Long.parseLong(args[0])), "", false);
-		    				eb.addBlankField(true);
-		    				eb.addField("Beatmap:", song_name + "("+id.toString()+")", false);
-		    				eb.addField("Score:", score.toString(), false);
-		    				eb.addField("Max Combo:", max_combo.toString(), false);
-		    				eb.addField("PP:", pp.toString(), false);
-		    				eb.addBlankField(true);
-		    				eb.addField("Map Link:", Config.getString("webprotocol")+"://"+Config.getString("web")+"/b/"+id, false);
-		    				event.getTextChannel().sendMessage(eb.build()).queue();;
-			                }catch (Exception e4){
-			                	
-			                	//Error Compiler
-			                	
-			                	EmbedBuilder eb = new EmbedBuilder();
-			    				eb.setColor(Color.red);
-			    				eb.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
-			    				eb.addBlankField(true);
-			    				eb.addField("-recent <Name/ID>", "", false);
-			    				event.getTextChannel().sendMessage(eb.build()).queue();;
-			                }
+			                eb.setColor(Color.BLACK);
+			                eb.setAuthor(User.ID_TO_USER(Long.parseLong(args[0]))+ " scored on " + song_name + " (" + endnumber.toString() + "★)", "https://osu.ppy.sh/b/"+ bmid, Config.getString("webprotocol")+"://a."+Config.getString("web")+"/"+args[0]);
+			                
+			                //Set BM Image
+			               eb.setThumbnail("https://b.ppy.sh/thumb/"+bm_id+".jpg");
+			               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". He got "+pp+"pp and a Score of "+score);
+			          
+			               event.getTextChannel().sendMessage(eb.build()).queue();;
 						
 						
 				
@@ -211,36 +218,33 @@ public class cmdRecent implements Command{
 								
 							}
 			            	
-			            	Long id = null;
-			            	Long score = null;
+							Long score = null;
 			            	Long max_combo = null;
-			            	@SuppressWarnings("unused")
 							Boolean full_combo = null;
 			            	Long pp = null;
-							
+							String rank = null;
+			            	
 							String song_name = null;
+							Long bm_id = null;
+			            	Long diff = null;
+							Long max_combo_map = null;
+							Long bmid = null;
 			            	
 							JSONObject obj = new JSONObject(content);
-							JSONArray arr = null;
-							try {
-								arr = obj.getJSONArray("scores");
-							}catch (Exception e5) {
-								EmbedBuilder eb = new EmbedBuilder();
-			    				eb.setColor(Color.red);
-			    				eb.setDescription("404 UIDNF - Trust me that Name/ID don't exist. (＞ｍ＜)");
-			    				eb.addBlankField(true);
-			    				eb.addField("-recent <name/id>", "", false);
-			    				event.getTextChannel().sendMessage(eb.build()).queue();;
-							}
+							JSONArray arr = obj.getJSONArray("scores");
 							for (int i = 0; i < arr.length(); i++)
 							{
 								if(i == 0) {
-									id = arr.getJSONObject(i).getLong("id");
+									rank = arr.getJSONObject(i).getString("rank");
 								    score = arr.getJSONObject(i).getLong("score");
 									max_combo = arr.getJSONObject(i).getLong("max_combo");
 									full_combo = arr.getJSONObject(i).getBoolean("full_combo");
 									pp = arr.getJSONObject(i).getLong("pp");
 									song_name = arr.getJSONObject(i).getJSONObject("beatmap").getString("song_name");
+									bm_id = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmapset_id");
+									bmid = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmap_id");
+									diff = arr.getJSONObject(i).getJSONObject("beatmap").getLong("difficulty");
+									max_combo_map = arr.getJSONObject(i).getJSONObject("beatmap").getLong("max_combo");
 									@SuppressWarnings("unused")
 									JSONObject scoreEntry = arr.getJSONObject(i);
 									
@@ -250,32 +254,29 @@ public class cmdRecent implements Command{
 							   
 							}
 							
-							try {
+							String endnumber = "";
+							
+							String number = String.valueOf(diff);
+							for(int i = 0; i < number.length(); i++) {
+							    int j = Character.digit(number.charAt(i), 10);
+							    endnumber = endnumber + j;
+							    if(i == 4) {
+							    	return;
+							    }
+							}
+							
+							endnumber.toString();
 				                EmbedBuilder eb = new EmbedBuilder();
-				                eb.setAuthor(args[0], Config.getString("webprotocol")+"://"+Config.getString("web")+"/u/"+User.USER_TO_ID(args[0]), Config.getString("webprotocol")+"://a."+Config.getString("web")+"/"+User.USER_TO_ID(args[0]));
-				                eb.setColor(Static.CREATE_RANDOM_COLOR());
 				                
-				                //Display
-			    				eb.addField("Latest "+Config.getString("name")+ " Score of " + args[0], "", false);
-			    				eb.addBlankField(true);
-			    				eb.addField("Beatmap:", song_name + "("+id.toString()+")", false);
-			    				eb.addField("Score:", score.toString(), false);
-			    				eb.addField("Max Combo:", max_combo.toString(), false);
-			    				eb.addField("PP:", pp.toString(), false);
-			    				eb.addBlankField(true);
-			    				eb.addField("Map Link:", Config.getString("webprotocol")+"://"+Config.getString("web")+"/b/"+id, false);
-			    				event.getTextChannel().sendMessage(eb.build()).queue();;
-				                }catch (Exception e4){
-				                	
-				                	//Error Compiler
-				                	
-				                	EmbedBuilder eb = new EmbedBuilder();
-				    				eb.setColor(Color.red);
-				    				eb.setDescription("404 UIDNF - Trust me that Name/ID don't exist. (＞ｍ＜)");
-				    				eb.addBlankField(true);
-				    				eb.addField("-recent <name/id>", "", false);
-				    				event.getTextChannel().sendMessage(eb.build()).queue();;
-				                }
+				                eb.setColor(Color.BLACK);
+				                eb.setAuthor(args[0] + " scored on " + song_name + " (" + endnumber.toString() + "★)", "https://osu.ppy.sh/b/"+ bmid, Config.getString("webprotocol")+"://a."+Config.getString("web")+"/"+User.USER_TO_ID(args[0]));
+				                
+				                //Set BM Image
+				               eb.setThumbnail("https://b.ppy.sh/thumb/"+bm_id+".jpg");
+				               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". He got "+pp+"pp and a Score of "+score);
+				          
+				               event.getTextChannel().sendMessage(eb.build()).queue();;
+				   
 							
 							
 					
