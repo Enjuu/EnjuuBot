@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Static {
 	
@@ -53,6 +54,10 @@ public class Static {
          	return Color.BLUE;
          }
 		
+	}
+	
+	public static void ReturnMessage(MessageReceivedEvent event) {
+		System.out.println("[INFO:] [COMMAND:] "+event.getAuthor() + " executed "+event.getMessage() + " successful");
 	}
 	
 	
