@@ -1,5 +1,8 @@
 # EnjuuBot
 
+# Important
+If you want to be on the newest version Compile this package self the Release/s are not up-to-date and the Bot on the Enjuu Discord is not always up-to-date too. What can happen if the Bot isn't uptodate? Some funktion are not avaible.
+
 ## What is EnjuuBot?
 > EnjuuBot is a Discord
 Bot written in Java that
