@@ -24,11 +24,11 @@ and can Display User Profiles.
 If you have any issues come on the Enjuu Server [Discord](https://discord.gg/N9KpaWn) and write me an PM.
 
 ## Current Commands:
-1. -user (name/id) | Display the Profile of the target.
-2. -isonline (name/id) | Display if the Person is Online.
-3. -recent (name/id) | Show the latest Score.
-4. -best (name/id) | Show the best Score.
-5. -help (name/id) | Show all Commands.
+1. eb:user (name/id) | Display the Profile of the target.
+2. eb:isonline (name/id) | Display if the Person is Online.
+3. eb:recent (name/id) | Show the latest Score.
+4. eb:best (name/id) | Show the best Score.
+5. eb:help (name/id) | Show all Commands.
 ### It is a new project and i will implement more. The Bot is currently in the Alpha State!
 
 ## Thanks to:

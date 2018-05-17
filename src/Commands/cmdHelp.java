@@ -26,10 +26,10 @@ public class cmdHelp implements Command{
             //Color
             eb.setColor(Static.CREATE_RANDOM_COLOR());
             eb.addBlankField(true);
-			eb.addField("-recent (Name/ID)", "Shows the Latest Play of the Player" , false);
-			eb.addField("-best (Name/ID)", "Shows the Best Play of the Player" , false);
-			eb.addField("-isonline (Name/ID)", "Checks if the Player is Online" , false);
-			eb.addField("-user (Name/ID)", "Shows the User of the Player" , false);
+			eb.addField("eb:recent (Name/ID)", "Shows the Latest Play of the Player" , false);
+			eb.addField("eb:best (Name/ID)", "Shows the Best Play of the Player" , false);
+			eb.addField("eb:isonline (Name/ID)", "Checks if the Player is Online" , false);
+			eb.addField("eb:user (Name/ID)", "Shows the User of the Player" , false);
 			event.getTextChannel().sendMessage(eb.build()).queue();;
             }catch (Exception e4){
             	
