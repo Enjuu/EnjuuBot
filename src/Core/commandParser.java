@@ -8,7 +8,7 @@ public class commandParser {
 
     public commandContainer parse(String raw, MessageReceivedEvent event) {
 
-        String beheaded = raw.replaceFirst("\\-", "");
+        String beheaded = raw.replaceFirst("\\eb:", "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();

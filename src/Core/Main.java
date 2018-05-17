@@ -42,11 +42,11 @@ public class Main {
 		builder.addEventListener(new CommandListener());
 		builder.addEventListener(new readyListener());
 		
-		commandHandler.commands.put("isonline", new cmdIsOnlineNew());
-		commandHandler.commands.put("recent", new cmdRecent());
-		commandHandler.commands.put("user", new cmdUserNew());
-		commandHandler.commands.put("best", new cmdBest());
-		commandHandler.commands.put("help", new cmdHelp());
+		commandHandler.commands.put("eb:isonline", new cmdIsOnlineNew());
+		commandHandler.commands.put("eb:recent", new cmdRecent());
+		commandHandler.commands.put("eb:user", new cmdUserNew());
+		commandHandler.commands.put("eb:best", new cmdBest());
+		commandHandler.commands.put("eb:help", new cmdHelp());
 		
 		try {
 			@SuppressWarnings("unused")
