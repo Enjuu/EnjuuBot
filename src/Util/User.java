@@ -45,18 +45,18 @@ public class User {
             JSONParser parser = new JSONParser();
             try {
             	
-            	File file = new File("idtouser.json");
+            	File file = new File("tmp/idtouser.json");
             		  
             		   file.delete();
             		   
             		
             	   
-            	PrintWriter writer = new PrintWriter("idtouser.json", "UTF-8");
+            	PrintWriter writer = new PrintWriter("tmp/idtouser.json", "UTF-8");
             	writer.println(getter);
             	writer.close();
             	
             	Object obj = parser.parse(new FileReader(
-            			"idtouser.json"));
+            			"tmp/idtouser.json"));
      
                 JSONObject jsonObject = (JSONObject) obj;
                 String username = (String) jsonObject.get("username");
@@ -98,13 +98,13 @@ public class User {
             JSONParser parser = new JSONParser();
             try {
             	
-            	File file = new File("usertoid.json");
+            	File file = new File("tmp/usertoid.json");
             		  
             		   file.delete();
             		   
             		
             	   
-            	PrintWriter writer = new PrintWriter("usertoid.json", "UTF-8");
+            	PrintWriter writer = new PrintWriter("tmp/usertoid.json", "UTF-8");
             	writer.println(getter);
             	writer.close();
             	

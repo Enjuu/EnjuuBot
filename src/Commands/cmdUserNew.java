@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import Util.Config;
 import Util.Static;
+import Util.kamojiAPI;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -32,10 +33,10 @@ public class cmdUserNew implements Command{
 	public void action(String[] args, MessageReceivedEvent event)
 			throws FileNotFoundException, UnsupportedEncodingException {
 		if(args.length == 0) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Wrong Arguments", "(ಥ﹃ಥ)", "-user <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Wrong Arguments",kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("prefix")+"user <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else if(args.length > 1) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Too much Arguments?", "ಠ_ಠ", "-user <Name/ID> (Tipp: Replace Spaces with %20)");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Too much Arguments?", kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("prefix")+"user <Name/ID> (Tipp: Replace Spaces with %20)");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else{
 			try{
@@ -70,9 +71,9 @@ public class cmdUserNew implements Command{
 				        }catch (Exception e){
 				        	EmbedBuilder eb300 = new EmbedBuilder();
 				        	eb300.setColor(Color.red);
-				        	eb300.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
+				        	eb300.setDescription("404 UIDNF - Trust me that User don't exist. "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 				        	eb300.addBlankField(true);
-		    				eb300.addField("-userid <UserID>", "", false);
+		    				eb300.addField(Config.getString("prefix")+"-user <Username/ID>", "", false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
 				        }
 				            JSONParser parser = new JSONParser();
@@ -97,9 +98,9 @@ public class cmdUserNew implements Command{
 				                if(code == 404) {
 				                	EmbedBuilder eb = new EmbedBuilder();
 				    				eb.setColor(Color.red);
-				    				eb.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
+				    				eb.setDescription("404 UIDNF - Trust me that User don't exist. (ï¼žï½�ï¼œ)"+kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 				    				eb.addBlankField(true);
-				    				eb.addField("-userid <UserID>", "", false);
+				    				eb.addField(Config.getString("prefix")+"user <Username/ID>", "", false);
 				    				event.getTextChannel().sendMessage(eb.build()).queue();;
 				                }else{
 				                		String username = (String) jsonObject.get("username");
@@ -137,9 +138,9 @@ public class cmdUserNew implements Command{
 						                	
 						                	EmbedBuilder eb = new EmbedBuilder();
 						    				eb.setColor(Color.red);
-						    				eb.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
+						    				eb.setDescription("404 UIDNF - Trust me that User don't exist. "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 						    				eb.addBlankField(true);
-						    				eb.addField("-userid <UserID>", "", false);
+						    				eb.addField(Config.getString("prefix")+"user <Username/ID>", "", false);
 						    				event.getTextChannel().sendMessage(eb.build()).queue();;
 						                }
 					    				
@@ -165,13 +166,6 @@ public class cmdUserNew implements Command{
 				// ---------- IS A USERNAME --------
 				
 				try{
-					 //Loading
-					 EmbedBuilder ebload = new EmbedBuilder();
-					 ebload.setColor(Static.CREATE_RANDOM_COLOR());
-					 ebload.setTitle("Loading User...");
-					 ebload.setDescription("Some weird loading text!");
-					 
-					 event.getTextChannel().sendMessage(ebload.build()).queue( message -> message.delete().queueAfter(3, TimeUnit.SECONDS) );
 					 	String getter = null;
 				        URL u = new URL(Config.getString("apiprotocol")+"://"+Config.getString("api")+"/api/v1/users?name="+args[0]);
 				        try{
@@ -192,9 +186,9 @@ public class cmdUserNew implements Command{
 				        }catch (Exception e5){
 				        	EmbedBuilder eb300 = new EmbedBuilder();
 				        	eb300.setColor(Color.red);
-				        	eb300.setDescription("404 UIDNF - Trust me that UserName don't exist. (＞ｍ＜)");
+				        	eb300.setDescription("404 UIDNF - Trust me that User don't exist. "+kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 				        	eb300.addBlankField(true);
-		    				eb300.addField("-user <Username>", "", false);
+		    				eb300.addField(Config.getString("preifx")+"user <Username/ID>", "", false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
 				        }
 				            JSONParser parser = new JSONParser();
@@ -219,9 +213,9 @@ public class cmdUserNew implements Command{
 				                if(code == 404) {
 				                	EmbedBuilder eb = new EmbedBuilder();
 				    				eb.setColor(Color.red);
-				    				eb.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
+				    				eb.setDescription("404 UIDNF - Trust me that User don't exist. "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 				    				eb.addBlankField(true);
-				    				eb.addField("-user <UserID>", "", false);
+				    				eb.addField(Config.getString("prefix")+"user <Username/ID>", "", false);
 				    				event.getTextChannel().sendMessage(eb.build()).queue();;
 				                }else{
 				                		String username = (String) jsonObject.get("username");
@@ -259,9 +253,9 @@ public class cmdUserNew implements Command{
 						                	
 						                	EmbedBuilder eb = new EmbedBuilder();
 						    				eb.setColor(Color.red);
-						    				eb.setDescription("404 UIDNF - Trust me that UserID don't exist. (＞ｍ＜)");
+						    				eb.setDescription("404 UIDNF - Trust me that User don't exist. "+kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 						    				eb.addBlankField(true);
-						    				eb.addField("-user <UserID>", "", false);
+						    				eb.addField(Config.getString("prefix")+"user <Username/ID>", "", false);
 						    				event.getTextChannel().sendMessage(eb.build()).queue();;
 						                }
 					    				

@@ -7,16 +7,16 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 import Core.commandHandler;
+import Util.Config;
 
 public class CommandListener extends ListenerAdapter {
 
-    @SuppressWarnings({ "deprecation" })
 	@Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
-        if (event.getMessage().getContent().contains("eb:") && event.getMessage().getAuthor().getId() != event.getJDA().getSelfUser().getId()) {
+        if (event.getMessage().getContentRaw().contains(Config.getString("prefix")) && event.getMessage().getAuthor().getId() != event.getJDA().getSelfUser().getId()) {
             try {
-				commandHandler.handleCommand(commandHandler.parser.parse(event.getMessage().getContent(), event));
+				commandHandler.handleCommand(commandHandler.parser.parse(event.getMessage().getContentRaw(), event));
 			} catch (FileNotFoundException | UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

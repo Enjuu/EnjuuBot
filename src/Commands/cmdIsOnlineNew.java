@@ -21,6 +21,7 @@ import org.json.simple.parser.ParseException;
 import Util.Config;
 import Util.Static;
 import Util.User;
+import Util.kamojiAPI;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -36,10 +37,10 @@ public class cmdIsOnlineNew implements Command{
 	public void action(String[] args, MessageReceivedEvent event)
 			throws FileNotFoundException, UnsupportedEncodingException {
 		if(args.length == 0) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Wrong Arguments", "(ಥ﹃ಥ)", "-isonline <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Wrong Arguments",  kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("preifx")+"isonline <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else if(args.length > 1) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Too much Arguments?", "ಠ_ಠ", "-isonline <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Too much Arguments?",  kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("preifx")+"isonline <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else{
 			try{
@@ -104,7 +105,7 @@ public class cmdIsOnlineNew implements Command{
 		                	EmbedBuilder eb300 = new EmbedBuilder();
 		    	        	eb300.setColor(Color.GREEN);
 		    	        	Long id = Long.parseLong(args[0]); 
-		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+args[0]+")"+" is online! (＞ｍ＜)");
+		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+args[0]+")"+" is online! (ï¼žï½�ï¼œ)");
 		    	        	eb300.addBlankField(true);
 		    	        	eb300.addField("yay! Go and Stalk him. Other Objects:", "Message: "+message + " Status: "+status, false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
@@ -112,7 +113,7 @@ public class cmdIsOnlineNew implements Command{
 		                	EmbedBuilder eb300 = new EmbedBuilder();
 		    	        	eb300.setColor(Color.RED);
 		    	        	Long id = Long.parseLong(args[0]); 
-		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+args[0]+")"+" is not Online! (＞ｍ＜)");
+		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+args[0]+")"+" is not Online! (ï¼žï½�ï¼œ)");
 		    	        	eb300.addBlankField(true);
 		    				eb300.addField(":c Other Objects:", "Message: "+message + " Status: "+status, false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
@@ -148,9 +149,9 @@ public class cmdIsOnlineNew implements Command{
 		        }catch (Exception e2){
 		        	EmbedBuilder eb300 = new EmbedBuilder();
 		        	eb300.setColor(Color.red);
-		        	eb300.setDescription("404 UIDNF - Trust me that Username don't exist. (＞ｍ＜)");
+		        	eb300.setDescription("404 UIDNF - Trust me that User don't exist. "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 		        	eb300.addBlankField(true);
-					eb300.addField("-isonline <name/id>", "", false);
+					eb300.addField(Config.getString("prefix")+"isonline <name/id>", "", false);
 					event.getTextChannel().sendMessage(eb300.build()).queue();;
 					System.out.println("23");
 		        }
@@ -188,7 +189,7 @@ public class cmdIsOnlineNew implements Command{
 		                	EmbedBuilder eb300 = new EmbedBuilder();
 		    	        	eb300.setColor(Color.GREEN);
 		    	        	Long id = User.USER_TO_ID(args[0]); 
-		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+User.USER_TO_ID(args[0])+")"+" is online! (＞ｍ＜)");
+		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+User.USER_TO_ID(args[0])+")"+" is online! "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 		    	        	eb300.addBlankField(true);
 		    	        	eb300.addField("yay! Go and Stalk him. Other Objects:", "Message: "+message + " Status: "+status, false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
@@ -196,12 +197,12 @@ public class cmdIsOnlineNew implements Command{
 		                	EmbedBuilder eb300 = new EmbedBuilder();
 		    	        	eb300.setColor(Color.RED);
 		    	        	Long id = User.USER_TO_ID(args[0]); 
-		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+User.USER_TO_ID(args[0])+")"+" is not Online! (＞ｍ＜)");
+		    	        	eb300.setDescription(User.ID_TO_USER(id)+"("+User.USER_TO_ID(args[0])+")"+" is not Online! "+ kamojiAPI.get(kamojiAPI.kamojitype.JOY));
 		    	        	eb300.addBlankField(true);
 		    				eb300.addField(":c Other Objects:", "Message: "+message + " Status: "+status, false);
 		    				event.getTextChannel().sendMessage(eb300.build()).queue();;
 		                }
-		                System.out.println(jsonObject.toJSONString());
+		               
 			}
 			
 		}

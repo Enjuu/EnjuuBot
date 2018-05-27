@@ -4,11 +4,13 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 
+import Util.Config;
+
 public class commandParser {
 
     public commandContainer parse(String raw, MessageReceivedEvent event) {
 
-        String beheaded = raw.replaceFirst("\\eb:", "");
+        String beheaded = raw.replaceFirst("\\"+Config.getString("prefix"), "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();

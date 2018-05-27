@@ -1,40 +1,52 @@
 package Core;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
+
+import javax.security.auth.login.LoginException;
+
+import Listener.arlistener;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 public class Main {
 	
+	public static JDABuilder builder = new JDABuilder(AccountType.BOT);
 	
 	public static void main (String[] args) {
+		builder.setToken("MzcxNzA5NzAzOTkxOTg0MTI4.DWICcQ.kbSeYiuPWNu1tI-jJJkkUiJZFfM");
+		builder.setGame(Game.playing("I Like Potatoes"));
+		builder.setAutoReconnect(true);
+		builder.setStatus(OnlineStatus.ONLINE);
+		
+		builder.addEventListener(new arlistener());
 		
 		
-		File folder = new File("plugins/");
-		File[] listOfFiles = folder.listFiles();
-
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		    	URL url = null;
-				try {
-					url = file.toURI().toURL();
-				} catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				}  
-				URL[] urls = new URL[]{url};
-
-				@SuppressWarnings("resource")
-				ClassLoader cl = new URLClassLoader(urls);
-				try {
-					@SuppressWarnings({ "rawtypes", "unused" })
-					Class cls = cl.loadClass("core.main");
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-		    }
+		
+	
+		
+		
+		try {
+			@SuppressWarnings("unused")
+			JDA jda = builder.buildBlocking();
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RateLimitedException e) {
+			
 		}
 		
+	
+
+	
 	}
 	
 

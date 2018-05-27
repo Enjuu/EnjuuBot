@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.time.temporal.TemporalAccessor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -22,6 +21,7 @@ import org.json.JSONObject;
 import Util.Config;
 import Util.Static;
 import Util.User;
+import Util.kamojiAPI;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -33,14 +33,15 @@ public class cmdBest implements Command{
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void action(String[] args, MessageReceivedEvent event)
 			throws FileNotFoundException, UnsupportedEncodingException {
 		if(args.length == 0) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Wrong Arguments", "(à²¥ï¹ƒà²¥)", "-best <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Wrong Arguments", kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("prefix")+"best <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else if(args.length > 1) {
-			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("404", "Too much Arguments?", "à² _à² ", "-best <Name/ID>");
+			EmbedBuilder error = Static.CREATE_NORMAL_ERROR("Err", "Too much Arguments?",  kamojiAPI.get(kamojiAPI.kamojitype.JOY), Config.getString("prefix")+"best <Name/ID>");
 			event.getTextChannel().sendMessage(error.build()).queue();;
 		}else{
 			try{
@@ -114,6 +115,7 @@ public class cmdBest implements Command{
 						Long bmid = null;
 		            	
 						JSONObject obj = new JSONObject(content);
+						try {
 						JSONArray arr = obj.getJSONArray("scores");
 						for (int i = 0; i < arr.length(); i++)
 						{
@@ -128,13 +130,21 @@ public class cmdBest implements Command{
 								bmid = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmap_id");
 								diff = arr.getJSONObject(i).getJSONObject("beatmap").getLong("difficulty");
 								max_combo_map = arr.getJSONObject(i).getJSONObject("beatmap").getLong("max_combo");
-								@SuppressWarnings("unused")
 								JSONObject scoreEntry = arr.getJSONObject(i);
 								
 							}else{
 								
 							}
 						   
+						}
+						}catch(Exception e25) {
+							EmbedBuilder eb = new EmbedBuilder();
+		    				eb.setColor(Color.red);
+		    				eb.setDescription("404 - Trust me that User don't exist. "+kamojiAPI.get(kamojiAPI.kamojitype.JOY));
+		    				eb.addBlankField(true);
+		    				eb.addField(Config.getString("prefix")+"best <UserID/Username>", "", false);
+		    				event.getTextChannel().sendMessage(eb.build()).queue();;
+		    				return;
 						}
 						
 						String endnumber = "";
@@ -156,30 +166,20 @@ public class cmdBest implements Command{
 			                
 			                //Set BM Image
 			               eb.setThumbnail("https://b.ppy.sh/thumb/"+bm_id+".jpg");
-			               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". He got "+pp+"pp and a Score of "+score);
+			               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". They got "+pp+"pp and a Score of "+score);
 			          
 			               event.getTextChannel().sendMessage(eb.build()).queue();;
 						
 						
 				
 			}catch (Exception e) {
-				
-				//Loading
-				 EmbedBuilder ebload = new EmbedBuilder();
-				 ebload.setColor(Static.CREATE_RANDOM_COLOR());
-				 ebload.setTitle("Loading User...");
-				 ebload.setDescription("Some weird loading text!");
-				 
-				 event.getTextChannel().sendMessage(ebload.build()).queue( message -> message.delete().queueAfter(3, TimeUnit.SECONDS) );
-				
-				
 				// -------- IS A Username ---------
 					String getter = null;
 			        URL u = null;
 					try {
 						u = new URL(Config.getString("apiprotocol")+"://"+Config.getString("api")+"/api/v1/users/scores/best?name="+args[0]);
 					} catch (MalformedURLException e12) {
-						// TODO Auto-generated catch bl
+						
 					}
 			        try{
 			            URLConnection urlConnection = u.openConnection();
@@ -231,27 +231,36 @@ public class cmdBest implements Command{
 							Long bmid = null;
 			            	
 							JSONObject obj = new JSONObject(content);
-							JSONArray arr = obj.getJSONArray("scores");
-							for (int i = 0; i < arr.length(); i++)
-							{
-								if(i == 0) {
-									rank = arr.getJSONObject(i).getString("rank");
-								    score = arr.getJSONObject(i).getLong("score");
-									max_combo = arr.getJSONObject(i).getLong("max_combo");
-									full_combo = arr.getJSONObject(i).getBoolean("full_combo");
-									pp = arr.getJSONObject(i).getLong("pp");
-									song_name = arr.getJSONObject(i).getJSONObject("beatmap").getString("song_name");
-									bm_id = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmapset_id");
-									bmid = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmap_id");
-									diff = arr.getJSONObject(i).getJSONObject("beatmap").getLong("difficulty");
-									max_combo_map = arr.getJSONObject(i).getJSONObject("beatmap").getLong("max_combo");
-									@SuppressWarnings("unused")
-									JSONObject scoreEntry = arr.getJSONObject(i);
-									
-								}else{
-									
+							try {
+								JSONArray arr = obj.getJSONArray("scores");
+								for (int i = 0; i < arr.length(); i++)
+								{
+									if(i == 0) {
+										rank = arr.getJSONObject(i).getString("rank");
+									    score = arr.getJSONObject(i).getLong("score");
+										max_combo = arr.getJSONObject(i).getLong("max_combo");
+										full_combo = arr.getJSONObject(i).getBoolean("full_combo");
+										pp = arr.getJSONObject(i).getLong("pp");
+										song_name = arr.getJSONObject(i).getJSONObject("beatmap").getString("song_name");
+										bm_id = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmapset_id");
+										bmid = arr.getJSONObject(i).getJSONObject("beatmap").getLong("beatmap_id");
+										diff = arr.getJSONObject(i).getJSONObject("beatmap").getLong("difficulty");
+										max_combo_map = arr.getJSONObject(i).getJSONObject("beatmap").getLong("max_combo");
+										JSONObject scoreEntry = arr.getJSONObject(i);
+										
+									}else{
+										
+									}
+								   
 								}
-							   
+							}catch(Exception e25) {
+								EmbedBuilder eb = new EmbedBuilder();
+			    				eb.setColor(Color.red);
+			    				eb.setDescription("404 - Trust me that User don't exist. "+kamojiAPI.get(kamojiAPI.kamojitype.JOY));
+			    				eb.addBlankField(true);
+			    				eb.addField(Config.getString("prefix")+"best <UserID/Username>", "", false);
+			    				event.getTextChannel().sendMessage(eb.build()).queue();;
+			    				return;
 							}
 							
 							String endnumber = "";
@@ -273,7 +282,7 @@ public class cmdBest implements Command{
 				                
 				                //Set BM Image
 				               eb.setThumbnail("https://b.ppy.sh/thumb/"+bm_id+".jpg");
-				               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". He got "+pp+"pp and a Score of "+score);
+				               eb.appendDescription("Scored a "+ rank+ " with a combo of "+max_combo+"/"+max_combo_map+". They got "+pp+"pp and a Score of "+score);
 				          
 				               event.getTextChannel().sendMessage(eb.build()).queue();;
 				   

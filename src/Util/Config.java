@@ -37,13 +37,14 @@ public class Config {
 			System.out.println("[WARNING]: No Config Found! Create one...");
 			JSONObject obj = new JSONObject();
 			obj.put("name", "Enjuu");
+			obj.put("clientid", "404635892381384704");
 			obj.put("apiprotocol", "https");
 			obj.put("api", "enjuu.click");
 			obj.put("webprotocol", "https");
 			obj.put("web", "enjuu.click");
 			obj.put("token", "NaN");
 			obj.put("status", "on Enjuu");
-	 
+			obj.put("prefix", "eb:");
 		
 			try (FileWriter file = new FileWriter("config.json")) {
 				file.write(obj.toJSONString());
@@ -85,7 +86,7 @@ public class Config {
 		}
 	}
 	
-	public static Long getLong(Long string) {
+	public static Long getLong(String string) {
 		try{
 			Long result = (Long) objconfig.get(string);
 			return result;
