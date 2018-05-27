@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>DiscordBot</groupId>
-    <artifactId>DiscordBot</artifactId>
+    <groupId>EnjuuBot</groupId>
+    <artifactId>EnjuuBot</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <repositories>
@@ -38,6 +38,11 @@
             <version>LATEST</version>
         </dependency>
         <dependency>
+		    <groupId>com.neovisionaries</groupId>
+		    <artifactId>nv-websocket-client</artifactId>
+		    <version>2.4</version>
+		</dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>LATEST</version>
@@ -58,15 +63,15 @@
  			<version>1.2.34</version>
 		</dependency>
         <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <dependency>
             <groupId>com.sedmelluq</groupId>
             <artifactId>lavaplayer</artifactId>
             <version>LATEST</version>
         </dependency>
+	    <dependency>
+		    <groupId>net.dv8tion</groupId>
+		    <artifactId>JDA</artifactId>
+		    <version>LATEST</version>
+		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -82,14 +87,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.8-dmr</version>
         </dependency>
-        <!--
-            NEEDED FOR ANOTHER COMMAND NOT IMPLEMENTED YET
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.10.3</version>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
