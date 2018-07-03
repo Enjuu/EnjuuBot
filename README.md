@@ -1,4 +1,4 @@
-# EnjuuBot - RW 1.2 
+# EnjuuBot - RW 1.2 [![CodeFactor](https://www.codefactor.io/repository/github/enjuu/enjuubot/badge)](https://www.codefactor.io/repository/github/enjuu/enjuubot)
 
 ## Installing
 To use it download the Latest Release, you don't need to compile it, because it has a Config
