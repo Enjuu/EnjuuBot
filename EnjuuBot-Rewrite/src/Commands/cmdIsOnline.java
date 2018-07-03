@@ -47,7 +47,7 @@ public class cmdIsOnline implements Command{
 					e.appendDescription("Online");
 					e.addBlankField(false);
 					e.addField("Links", "[Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-					event.getTextChannel().sendMessage(e.build()).queue();;
+					event.getTextChannel().sendMessage(e.build()).queue();
 				
 				}else {
 					EmbedBuilder e = new EmbedBuilder();
@@ -56,7 +56,7 @@ public class cmdIsOnline implements Command{
 					e.appendDescription("Offline");
 					e.addBlankField(false);
 					e.addField("Links", "[Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-					event.getTextChannel().sendMessage(e.build()).queue();;
+					event.getTextChannel().sendMessage(e.build()).queue();
 				}
 			}else {
 				User u = null;
@@ -74,7 +74,7 @@ public class cmdIsOnline implements Command{
 					e.appendDescription("Online");
 					e.addBlankField(false);
 					e.addField("Links", "[Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-					event.getTextChannel().sendMessage(e.build()).queue();;
+					event.getTextChannel().sendMessage(e.build()).queue();
 				
 				}else {
 					EmbedBuilder e = new EmbedBuilder();
@@ -83,7 +83,7 @@ public class cmdIsOnline implements Command{
 					e.appendDescription("Offline");
 					e.addBlankField(false);
 					e.addField("Links", "[Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-					event.getTextChannel().sendMessage(e.build()).queue();;
+					event.getTextChannel().sendMessage(e.build()).queue();
 				
 				}
 			}

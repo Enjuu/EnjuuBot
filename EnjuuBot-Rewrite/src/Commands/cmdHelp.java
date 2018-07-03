@@ -29,7 +29,7 @@ public class cmdHelp implements Command{
 		eb.addField(Config.getString("prefix")+"user (Name/ID)", "Shows the profile of the Player." , false);
 		eb.addField(Config.getString("prefix")+"help (Name/ID)", "Show all Commands of the Bot." , false);
 		eb.addField(Config.getString("prefix")+"invite (Name/ID)", "Invite this bot to your Server" , false);
-		event.getTextChannel().sendMessage(eb.build()).queue();;
+		event.getTextChannel().sendMessage(eb.build()).queue();
 	}
 
 	@Override

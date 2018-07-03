@@ -23,7 +23,7 @@ public class cmdInvite implements Command{
         eb.addBlankField(false);
 		eb.appendDescription("Invite this Bot to your Server!");
 		eb.addField("Link:", "https://discordapp.com/api/oauth2/authorize?client_id=" + Config.getString("clientid")+ "&permissions=0&scope=bot", false);
-		event.getTextChannel().sendMessage(eb.build()).queue();;
+		event.getTextChannel().sendMessage(eb.build()).queue();
 		
 	}
 

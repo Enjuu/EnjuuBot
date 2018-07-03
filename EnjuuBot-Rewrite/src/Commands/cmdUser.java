@@ -49,7 +49,7 @@ public class cmdUser implements Command{
 						.append(u.getPrivileges())
 						.toString();
 				em.addField("Privileges:", s, false);
-				event.getTextChannel().sendMessage(em.build()).queue();;
+				event.getTextChannel().sendMessage(em.build()).queue();
 			}else {
 				User u = null;
 				try {
@@ -69,7 +69,7 @@ public class cmdUser implements Command{
 						.append(u.getPrivileges())
 						.toString();
 				em.addField("Privileges:", s, false);
-				event.getTextChannel().sendMessage(em.build()).queue();;
+				event.getTextChannel().sendMessage(em.build()).queue();
 			}
 		}
 	}

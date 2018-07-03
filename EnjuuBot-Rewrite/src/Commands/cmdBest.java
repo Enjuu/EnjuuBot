@@ -57,7 +57,7 @@ public class cmdBest implements Command{
                 eb.setThumbnail("https://b.ppy.sh/thumb/"+s.getbeatmap_id()+".jpg");
                 eb.appendDescription("Scored a "+ s.getRank()+ " with a combo of "+s.getMax_Combo()+"/"+s.getmap_max_combo()+". He/She got "+s.getPP()+"pp and a Score of "+s.getScore());
                 eb.addField("Links:", "[Beatmap](https://osu.ppy.sh/beatmapsets/"+s.getbeatmapset_id()+") [Leaderboard](https://"+Config.getString("web")+"/b/"+s.getbeatmap_id()+") [Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-               event.getTextChannel().sendMessage(eb.build()).queue();;
+               event.getTextChannel().sendMessage(eb.build()).queue();
 			}else {
 					User u = null;
 					try {
@@ -82,7 +82,7 @@ public class cmdBest implements Command{
 	                eb.setThumbnail("https://b.ppy.sh/thumb/"+s.getbeatmapset_id()+".jpg");
 	                eb.appendDescription("Scored a "+ s.getRank()+ " with a combo of "+s.getMax_Combo()+"/"+s.getmap_max_combo()+". He/She got "+s.getPP()+"pp and a Score of "+s.getScore());
 	                eb.addField("Links:", "[Beatmap](https://osu.ppy.sh/beatmapsets/"+s.getbeatmapset_id()+") [Leaderboard](https://"+Config.getString("web")+"/b/"+s.getbeatmap_id()+") [Profile](https://"+Config.getString("web")+"/u/"+u.getID()+")", false);
-	                event.getTextChannel().sendMessage(eb.build()).queue();;
+	                event.getTextChannel().sendMessage(eb.build()).queue();
 			}
 		}
 		
